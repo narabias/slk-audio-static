@@ -6,8 +6,6 @@ if errorlevel 1 (
   pause
   exit /b 1
 )
-copy /Y app.js.txt app.js >nul
-copy /Y tools\prepare-vendor.mjs.txt tools\prepare-vendor.mjs >nul
 call npm run setup:vendor
 if errorlevel 1 (
   echo [ERROR] Preparation failed.

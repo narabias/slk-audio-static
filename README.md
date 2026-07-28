@@ -33,7 +33,7 @@ macOS / Linux：
 
     ./prepare.sh
 
-或者直接运行：
+或者：
 
     npm run setup:vendor
 
@@ -68,15 +68,6 @@ macOS / Linux：
 - 输出 WAV：`silk-wasm` 解码后由 JavaScript 添加 WAV 头，不加载 FFmpeg。
 - 输出 MP3：先生成 WAV，再按需加载 FFmpeg 编码 MP3。
 
-## 开源许可与标注
-
-页面底部提供“第三方许可与源码说明”入口。发布时请保留：
-
-    THIRD_PARTY_NOTICES.md
-    LICENSES/
-
-其中包含 `silk-wasm`、SILK/Skype SDK、`ffmpeg.wasm` 与 `@ffmpeg/core` 的许可证和源码入口。当前 `@ffmpeg/core 0.12.10` 的 npm 包许可证为 GPL-2.0-or-later。
-
 ## 需要注意
 
 - SLK 一般不可靠地保存可供网页识别的采样率。默认使用 24000 Hz；若速度或音调异常，可选择 16000、12000、8000 等重新解码。
@@ -89,12 +80,12 @@ macOS / Linux：
 
     index.html
     styles.css
-    app.js.txt
+    app.js
     vendor/
       silk/
       ffmpeg/
       licenses/
-    tools/prepare-vendor.mjs.txt
+    tools/prepare-vendor.mjs
     .github/workflows/pages.yml
 
 ## 版本
