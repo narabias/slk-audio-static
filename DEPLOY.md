@@ -1,3 +1,14 @@
+## JavaScript 文件名说明
+
+源码包将 JavaScript 保存为 `.js.txt`：
+
+```text
+app.js.txt
+tools/prepare-vendor.mjs.txt
+```
+
+直接使用仓库自带的 GitHub Actions 部署时不需要改名，工作流会自动恢复正确后缀。
+
 # GitHub Pages 部署清单
 
 ## 推荐方式：直接上传源码

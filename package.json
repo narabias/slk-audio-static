@@ -4,8 +4,8 @@
   "private": true,
   "description": "No-bundler static browser audio and Tencent SILK converter",
   "scripts": {
-    "prepare:vendor": "node tools/prepare-vendor.mjs",
-    "setup:vendor": "npm install --ignore-scripts --no-audit --no-fund && npm run prepare:vendor"
+    "prepare:vendor": "node -e \"require('fs').copyFileSync('tools/prepare-vendor.mjs.txt','tools/prepare-vendor.mjs')\" && node tools/prepare-vendor.mjs",
+    "setup:vendor": "node -e \"require('fs').copyFileSync('app.js.txt','app.js')\" && npm install --ignore-scripts --no-audit --no-fund && npm run prepare:vendor"
   },
   "dependencies": {
     "@ffmpeg/core": "0.12.10",
