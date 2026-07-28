@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="完全在浏览器本地运行的音频与腾讯 SILK/SLK 转换工具">
+  <meta name="theme-color" content="#111827">
+  <title>SLK 音频转换器</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <p class="eyebrow">LOCAL · STATIC · PRIVATE</p>
+      <h1>SLK 音频转换器</h1>
+      <p class="lead">纯前端运行。文件不会上传到服务器；普通格式优先使用浏览器原生音频能力，必要时才加载 FFmpeg WASM。</p>
+    </header>
+
+    <section class="card" aria-labelledby="converter-title">
+      <div class="card-heading">
+        <div>
+          <h2 id="converter-title">转换</h2>
+          <p id="mode-hint">将 WAV、MP3、M4A、FLAC、OGG 等音频转换为腾讯 SILK/SLK。</p>
+        </div>
+        <span id="engine-badge" class="badge">FFmpeg 未加载</span>
+      </div>
+
+      <div class="segmented" role="group" aria-label="转换方向">
+        <button type="button" class="segment active" data-mode="audio-to-slk">音频 → SLK</button>
+        <button type="button" class="segment" data-mode="slk-to-audio">SLK → 音频</button>
+      </div>
+
+      <label class="drop-zone" id="drop-zone" for="file-input">
+        <input id="file-input" type="file" accept="audio/*,.wav,.mp3,.m4a,.aac,.flac,.ogg,.opus,.wma,.amr,.slk,.silk">
+        <span class="drop-title">选择文件或拖到这里</span>
+        <span class="drop-subtitle" id="drop-subtitle">支持常见音频格式；WAV 通常不会加载 FFmpeg</span>
+      </label>
+
+      <div id="file-info" class="file-info hidden" aria-live="polite"></div>
+
+      <div class="options-grid">
+        <label class="field" id="encode-rate-field">
+          <span>SLK 编码采样率</span>
+          <select id="encode-rate">
+            <option value="24000" selected>24000 Hz（推荐）</option>
+            <option value="16000">16000 Hz</option>
+            <option value="12000">12000 Hz</option>
+            <option value="8000">8000 Hz</option>
+            <option value="32000">32000 Hz</option>
+            <option value="44100">44100 Hz</option>
+            <option value="48000">48000 Hz</option>
+          </select>
+        </label>
+
+        <label class="field hidden" id="decode-rate-field">
+          <span>SLK 原始采样率</span>
+          <select id="decode-rate">
+            <option value="24000" selected>24000 Hz（最常见）</option>
+            <option value="16000">16000 Hz</option>
+            <option value="12000">12000 Hz</option>
+            <option value="8000">8000 Hz</option>
+            <option value="32000">32000 Hz</option>
+            <option value="44100">44100 Hz</option>
+            <option value="48000">48000 Hz</option>
+          </select>
+        </label>
+
+        <label class="field hidden" id="output-format-field">
+          <span>输出格式</span>
+          <select id="output-format">
+            <option value="wav" selected>WAV（无需 FFmpeg）</option>
+            <option value="mp3">MP3（会加载 FFmpeg）</option>
+          </select>
+        </label>
+      </div>
+
+      <button id="convert-button" class="primary" type="button" disabled>开始转换</button>
+
+      <div class="progress-wrap hidden" id="progress-wrap" aria-live="polite">
+        <div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div>
+        <p id="status-text">准备中……</p>
+      </div>
+
+      <div id="result" class="result hidden">
+        <div>
+          <strong id="result-name"></strong>
+          <span id="result-meta"></span>
+        </div>
+        <div class="result-actions">
+          <audio id="audio-preview" controls class="hidden"></audio>
+          <a id="download-link" class="download" download>下载文件</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="notes">
+      <article>
+        <h3>什么时候加载 FFmpeg？</h3>
+        <p>浏览器能直接解码的 WAV、MP3、M4A 等格式不会加载 FFmpeg。只有原生解码失败，或者选择输出 MP3 时，才会加载约 32 MB 的 FFmpeg 核心。</p>
+      </article>
+      <article>
+        <h3>SLK 采样率</h3>
+        <p>SLK 文件本身通常不能可靠告诉网页原始采样率。微信语音最常见为 24000 Hz；播放速度或音调异常时，请换一个采样率重新解码。</p>
+      </article>
+      <article>
+        <h3>文件大小</h3>
+        <p>全部计算发生在浏览器内存中。桌面浏览器建议处理 100 MB 以内、十分钟左右的语音文件；手机端建议更小。</p>
+      </article>
+    </section>
+
+    <footer>
+      <span>无上传 · 无账户 · 无后端</span>
+      <a href="./THIRD_PARTY_NOTICES.md">第三方许可说明</a>
+    </footer>
+  </main>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

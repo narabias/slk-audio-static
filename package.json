@@ -1,0 +1,15 @@
+{
+  "name": "slk-audio-static",
+  "version": "1.0.0",
+  "private": true,
+  "description": "No-bundler static browser audio and Tencent SILK converter",
+  "scripts": {
+    "prepare:vendor": "node tools/prepare-vendor.mjs",
+    "setup:vendor": "npm install --ignore-scripts --no-audit --no-fund && npm run prepare:vendor"
+  },
+  "dependencies": {
+    "@ffmpeg/core": "0.12.10",
+    "@ffmpeg/ffmpeg": "0.12.15",
+    "silk-wasm": "3.7.1"
+  }
+}

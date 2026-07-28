@@ -1,0 +1,7 @@
+node_modules/
+.DS_Store
+vendor/silk/index.mjs
+vendor/silk/silk.wasm
+vendor/ffmpeg/*.js
+vendor/ffmpeg/*.wasm
+vendor/licenses/*.txt
